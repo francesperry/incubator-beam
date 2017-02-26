@@ -32,6 +32,7 @@ import org.apache.beam.sdk.coders.CoderRegistry;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.transforms.Aggregator;
 import org.apache.beam.sdk.transforms.Combine;
+import org.apache.beam.sdk.util.IOChannelUtils;
 import org.apache.spark.Accumulator;
 
 /**
@@ -68,7 +69,10 @@ public class SparkRuntimeContext implements Serializable {
   }
 
   public synchronized PipelineOptions getPipelineOptions() {
-    return deserializePipelineOptions(serializedPipelineOptions);
+    PipelineOptions options =  deserializePipelineOptions(serializedPipelineOptions);
+    System.out.println("****** REGISTERING MAGIC ********");
+    IOChannelUtils.registerIOFactoriesInternal(options, true);
+    return options;
   }
 
   /**

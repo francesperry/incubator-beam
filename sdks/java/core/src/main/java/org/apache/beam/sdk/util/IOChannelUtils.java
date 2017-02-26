@@ -141,7 +141,7 @@ public class IOChannelUtils {
     registerIOFactoriesInternal(options, true /* override */);
   }
 
-  private static void registerIOFactoriesInternal(
+  public static void registerIOFactoriesInternal(
       PipelineOptions options, boolean override) {
     Set<IOChannelFactoryRegistrar> registrars =
         Sets.newTreeSet(ReflectHelpers.ObjectsClassComparator.INSTANCE);
@@ -287,6 +287,7 @@ public class IOChannelUtils {
    * Returns the IOChannelFactory associated with an input specification.
    */
   public static IOChannelFactory getFactory(String spec) throws IOException {
+
     // The spec is almost, but not quite, a URI. In particular,
     // the reserved characters '[', ']', and '?' have meanings that differ
     // from their use in the URI spec. ('*' is not reserved).
@@ -304,7 +305,7 @@ public class IOChannelUtils {
       return ioFactory;
     }
 
-    throw new IOException("Unable to find handler for " + spec);
+    throw new IOException("Unable to find NEW!!!!! handler for " + spec);
   }
 
   /**
